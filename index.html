@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Kalkulator Sederhana</title>
+        <style>
+            /* CSS Styling */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f7f6;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .calculator {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                width: 300px;
+            }
+
+            .calculator input {
+                width: 100%;
+                padding: 15px;
+                font-size: 20px;
+                text-align: right;
+                border-radius: 5px;
+                border: 2px solid #ccc;
+                margin-bottom: 10px;
+            }
+
+            .calculator button {
+                width: 60px;
+                height: 60px;
+                font-size: 20px;
+                margin: 5px;
+                border-radius: 5px;
+                border: none;
+                background-color: #3498db;
+                color: white;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .calculator button:hover {
+                background-color: #2980b9;
+            }
+
+            .calculator button:active {
+                background-color: #1abc9c;
+            }
+
+            .calculator button.clear {
+                background-color: #e74c3c;
+            }
+
+            .calculator button.clear:hover {
+                background-color: #c0392b;
+            }
+
+            .calculator button.equal {
+                background-color: #2ecc71;
+            }
+
+            .calculator button.equal:hover {
+                background-color: #27ae60;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="calculator">
+            <input id="display" type="text" disabled placeholder="0" />
+            <div>
+                <button onclick="appendNumber('7')">7</button>
+                <button onclick="appendNumber('8')">8</button>
+                <button onclick="appendNumber('9')">9</button>
+                <button onclick="appendOperator('+')">+</button>
+            </div>
+            <div>
+                <button onclick="appendNumber('4')">4</button>
+                <button onclick="appendNumber('5')">5</button>
+                <button onclick="appendNumber('6')">6</button>
+                <button onclick="appendOperator('-')">-</button>
+            </div>
+            <div>
+                <button onclick="appendNumber('1')">1</button>
+                <button onclick="appendNumber('2')">2</button>
+                <button onclick="appendNumber('3')">3</button>
+                <button onclick="appendOperator('*')">*</button>
+            </div>
+            <div>
+                <button onclick="appendNumber('0')">0</button>
+                <button onclick="clearDisplay()" class="clear">C</button>
+                <button onclick="calculateResult()" class="equal">=</button>
+                <button onclick="appendOperator('/')">/</button>
+            </div>
+        </div>
+
+        <script>
+            // JavaScript untuk kalkulator
+
+            let display = document.getElementById("display");
+            let currentInput = "";
+
+            // Menambahkan angka ke tampilan
+            function appendNumber(number) {
+                currentInput += number;
+                display.value = currentInput;
+            }
+
+            // Menambahkan operator ke tampilan
+            function appendOperator(operator) {
+                if (currentInput === "") return;
+                currentInput += operator;
+                display.value = currentInput;
+            }
+
+            // Menghitung hasil operasi
+            function calculateResult() {
+                try {
+                    currentInput = eval(currentInput).toString();
+                    display.value = currentInput;
+                } catch {
+                    display.value = "Error";
+                    currentInput = "";
+                }
+            }
+
+            // Membersihkan tampilan
+            function clearDisplay() {
+                currentInput = "";
+                display.value = "0";
+            }
+        </script>
+    </body>
+</html>
